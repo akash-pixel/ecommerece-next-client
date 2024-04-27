@@ -3,10 +3,13 @@ import React, { useState } from 'react';
 import { signIn } from '../../../axios';
 import router from 'next/router';
 import Link from 'next/link';
+import { useAppDispatch } from '@/store/store';
+import { setAuthState } from '@/store/auth.slice';
 
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const dispatch = useAppDispatch();
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
@@ -14,7 +17,12 @@ const Login = () => {
             Username: username,
             Password: password
         })
-        router.push("/");
+
+        if (!result) return;
+
+        dispatch(setAuthState(true))
+
+        router.replace("/");
     };
 
     return (

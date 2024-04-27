@@ -5,6 +5,8 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { setToken, signUp } from "@/axios";
 import { ROLE } from "@/constant";
+import { useAppDispatch } from "@/store/store";
+import { setUserState } from "@/store/user.slice";
 
 
 export default function Register() {
@@ -17,6 +19,7 @@ export default function Register() {
         Password: "",
         ConfirmPassword: ""
     });
+    const dispatch = useAppDispatch();
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
@@ -24,6 +27,11 @@ export default function Register() {
             return;
         }
         const result = await signUp(user);
+
+        if (!result) { return }
+
+        dispatch(setUserState({ ...user, IsAdmin: false }))
+
         router.push("/");
     };
 

@@ -1,3 +1,4 @@
+"use client"
 import axios from "axios";
 import * as dotenv from "dotenv";
 dotenv.config();
@@ -18,11 +19,13 @@ export function setToken(token: string) {
 export async function signIn(data: IUserLogin) {
     try {
         const result: any = await axiosInstance.post('/auth/login', data);
-        setToken(result.data.access_token)
-        return result;
+        if (result?.data?.access_token) {
+            setToken(result.data.access_token)
+        } return result;
     } catch (error) {
         console.log(error);
     }
+    return null;
 }
 
 export async function signUp(data: IUserRegister) {
@@ -31,9 +34,11 @@ export async function signUp(data: IUserRegister) {
         if (result?.data?.access_token) {
             setToken(result.data.access_token)
         }
+        return result;
     } catch (error) {
         console.log(JSON.stringify(error));
     }
+    return null;
 }
 
 
