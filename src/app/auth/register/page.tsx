@@ -3,10 +3,9 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { setToken, signUp } from "@/axios";
-import { ROLE } from "@/constant";
 import { useAppDispatch } from "@/store/store";
 import { setUserState } from "@/store/user.slice";
+import { signUp } from "@/axios";
 
 
 export default function Register() {
@@ -30,7 +29,7 @@ export default function Register() {
 
         if (!result) { return }
 
-        dispatch(setUserState({ ...user, IsAdmin: false }))
+        dispatch(setUserState(result))
 
         router.push("/");
     };

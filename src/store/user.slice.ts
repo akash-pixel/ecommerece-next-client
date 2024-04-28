@@ -1,5 +1,7 @@
 "use client"
 
+import { WebRefService } from "@/common/web.ref.service";
+import { WebRef } from "@/constant";
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 export interface IUserState {
@@ -10,12 +12,7 @@ export interface IUserState {
     PhoneNumber?: string;
 }
 
-const initialState: IUserState = {
-    Username: "",
-    FirstName: "",
-    LastName: "",
-    IsAdmin: false
-};
+const initialState: IUserState = WebRefService.get(WebRef.USER_IDENTITY);
 
 export const userSlice = createSlice({
     name: "user",
