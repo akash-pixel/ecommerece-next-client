@@ -3,6 +3,7 @@ import axios, { AxiosError, AxiosInstance, AxiosResponse } from "axios";
 import * as dotenv from "dotenv";
 import { WebRef } from "./constant";
 import { WebRefService } from "./common/web.ref.service";
+import { IProductCreate } from "./app/admin/product/add/page";
 dotenv.config();
 
 const axiosInstance = axios.create({
@@ -54,10 +55,17 @@ export async function signUp(data: IUserRegister) {
     return result;
 }
 
-export async function getProfile(): Promise<IAuthResponse | null> {
-    return executeFunction(axiosInstance.get("/auth/profile"));
+export async function getProducts(): Promise<IProductResponse[] | null> {
+    return executeFunction(axiosInstance.get("/product"));
 }
 
+export async function addProduct(data: IProductCreate): Promise<IProductResponse[] | null> {
+    return executeFunction(axiosInstance.post("/product", data));
+}
+
+export async function getProductById(id: number): Promise<IProductResponse | null> {
+    return executeFunction(axiosInstance.get(`/product/${id}`));
+}
 
 ////////////////////////////////////////////////////////////////////////
 //                         Interface
@@ -83,4 +91,12 @@ export interface IAuthResponse {
     PhoneNumber: string,
     IsAdmin: boolean,
     access_token: string
+}
+
+export interface IProductResponse {
+    Name: string,
+    Description: string,
+    SKU: string,
+    Price: number,
+    File: []
 }
