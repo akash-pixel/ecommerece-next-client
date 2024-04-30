@@ -12,7 +12,22 @@ export interface IUserState {
     PhoneNumber?: string;
 }
 
-const initialState: IUserState = WebRefService.get(WebRef.USER_IDENTITY);
+
+
+    let initialState: IUserState = {
+        Username: "",
+        FirstName: "",
+        LastName: "",
+        IsAdmin: false,
+        PhoneNumber: "",
+    }
+
+    const persistantState = WebRefService.get(WebRef.USER_IDENTITY);
+
+    if(persistantState){
+        initialState = persistantState;
+    }
+
 
 export const userSlice = createSlice({
     name: "user",

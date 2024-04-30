@@ -4,13 +4,29 @@ import * as dotenv from "dotenv";
 import { WebRef } from "./constant";
 import { WebRefService } from "./common/web.ref.service";
 import { IProductCreate } from "./app/admin/product/add/page";
+import { ICategory } from "./components/category.add.edit.component";
 dotenv.config();
+
+function getAuthToken() {
+
+    const isServer = typeof window === "undefined";
+    if (isServer) {
+        return;
+    }
+
+    const token = window.localStorage.getItem(WebRef.TOKEN);
+    if (token) {
+        return token;
+    }
+
+    return "";
+}
 
 const axiosInstance = axios.create({
     baseURL: process.env.NEXT_PUBLIC_SERVER_URL,
     headers: {
         "Content-Type": "application/json",
-        Authorization: localStorage.getItem(WebRef.TOKEN)
+        Authorization: getAuthToken()
     }
 });
 
@@ -55,6 +71,7 @@ export async function signUp(data: IUserRegister) {
     return result;
 }
 
+// Product
 export async function getProducts(): Promise<IProductResponse[] | null> {
     return executeFunction(axiosInstance.get("/product"));
 }
@@ -65,6 +82,39 @@ export async function addProduct(data: IProductCreate): Promise<IProductResponse
 
 export async function getProductById(id: number): Promise<IProductResponse | null> {
     return executeFunction(axiosInstance.get(`/product/${id}`));
+}
+
+// Category
+export async function getCategoryList(): Promise<ICategoryResponse[] | null> {
+    return executeFunction(axiosInstance.get("/category"));
+}
+
+export async function addCategory(data: ICategory): Promise<ICategoryResponse[] | null> {
+    return executeFunction(axiosInstance.post("/category", data));
+}
+export async function updateCategory(data: ICategory): Promise<ICategoryResponse[] | null> {
+    return executeFunction(axiosInstance.post(`/category/${data.Id}`, data));
+}
+
+export async function getCategoryById(id: number): Promise<ICategoryResponse | null> {
+    return executeFunction(axiosInstance.get(`/category/${id}`));
+}
+
+// Discount
+export async function getDiscountList(): Promise<IDiscountResponse[] | null> {
+    return executeFunction(axiosInstance.get("/discount"));
+}
+
+export async function addDiscount(data: any): Promise<IDiscountResponse[] | null> {
+    return executeFunction(axiosInstance.post("/discount", data));
+}
+
+export async function updateDiscount(data: any): Promise<IDiscountResponse[] | null> {
+    return executeFunction(axiosInstance.put(`/discount/${data.Id}`, data));
+}
+
+export async function getDiscountById(id: number): Promise<IDiscountResponse | null> {
+    return executeFunction(axiosInstance.get(`/discount/${id}`));
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -99,4 +149,14 @@ export interface IProductResponse {
     SKU: string,
     Price: number,
     File: []
+}
+
+export interface ICategoryResponse {
+    Id: number;
+    Name: string;
+    Description: string;
+}
+
+export interface IDiscountResponse {
+
 }
