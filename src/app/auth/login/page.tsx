@@ -4,8 +4,8 @@ import "../../globals.css"
 import React, { useState } from 'react';
 import { signIn } from '../../../axios';
 import Link from 'next/link';
-import { useAppDispatch } from '@/store/store';
-import { setAuthState } from '@/store/auth.slice';
+import { useAppDispatch } from '@/redux/store';
+import { setAuthState } from '@/redux/slice/auth.slice';
 import { setUserState } from '@/store/user.slice';
 import { useRouter } from 'next/navigation'
 

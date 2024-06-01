@@ -4,7 +4,7 @@ import "../../globals.css"
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { useAppDispatch } from "@/store/store";
+import { useAppDispatch } from "@/redux/store";
 import { setUserState } from "@/store/user.slice";
 import { signUp } from "@/axios";
 

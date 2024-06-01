@@ -1,40 +1,23 @@
-"use client"
+"use client";
 
-import { useAppSelector } from "@/store/store";
-import "../app/globals.css"
 
-// export default function Navbar() {
-
-//     const username = useAppSelector((state) => state.user.Username);
-//     return (
-//         <div className="navbar">
-//             <div>
-//                 <a >
-//                     Logo
-//                 </a>
-//             </div>
-//             <div>
-//                 <h1>
-//                     Urban Nest
-//                 </h1>
-//             </div>
-//             <div className="user-cart">
-//                 <a href="#" className="cart-icon">Cart</a>
-//                 <a href="#" className="user">
-//                     Guest
-//                     {/* {username ? "\n" + username : ""} */}
-//                 </a>
-//             </div>
-//         </div>
-//     )
-// }
-import React, { useState } from 'react';
-import { FaBars, FaUserCircle, FaShoppingCart, FaEllipsisV } from 'react-icons/fa';
-import Link from 'next/link';
+import "../app/globals.css";
+import React, { useEffect, useState } from "react";
+import { FaBars, FaUserCircle, FaShoppingCart, FaEllipsisV } from "react-icons/fa";
+import Link from "next/link";
+import { useAppSelector } from "@/redux/hooks";
+import { IUserState } from "@/redux/slice/user.slice";
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
+    const [clientUsername, setClientUsername] = useState("");
+
+    const user = useAppSelector((state: { user: IUserState }) => state.user);
+
+    useEffect(() => {
+        setClientUsername(user.Username);
+    }, [user.Username]);
 
     const toggleNav = () => {
         setIsOpen(!isOpen);
@@ -56,24 +39,26 @@ const Navbar = () => {
                     <input
                         type="text"
                         placeholder="Products, Brands, Category"
-                        className="border rounded px-3 py-2 w-1/2 text-gray-700"
+                        className="border rounded-full px-3 py-2 w-1/2 text-gray-700"
                     />
                 </div>
                 <div className="hidden md:flex items-center space-x-4 text-white">
                     <div className="flex items-center space-x-2">
                         <FaUserCircle size={24} />
-                        <span>Username</span>
+                        <span>
+                            {clientUsername ? clientUsername : "G"}
+                        </span>
                     </div>
                     <FaShoppingCart size={24} />
                     <div className="relative">
                         <FaEllipsisV size={24} onClick={toggleMenu} className="cursor-pointer" />
                         {menuOpen && (
-                            <div className="absolute right-0 mt-2 w-48 bg-white border rounded shadow-lg">
-                                <Link href="/wishlist" passHref>
-                                    <a className="block px-4 py-2 text-gray-800 hover:bg-gray-200">Wishlist</a>
+                            <div className="absolute right-0 mt-2 w-48 bg-white border rounded shadow-lg" onClick={() => toggleMenu()}>
+                                <Link href="/wishlist" passHref className="block px-4 py-2 text-gray-800 hover:bg-gray-200">
+                                    Wishlist
                                 </Link>
-                                <Link href="/orders" passHref>
-                                    <a className="block px-4 py-2 text-gray-800 hover:bg-gray-200">Orders</a>
+                                <Link href={(user.IsAdmin && "/admin") + "/orders"} passHref className="block px-4 py-2 text-gray-800 hover:bg-gray-200">
+                                    Orders
                                 </Link>
                             </div>
                         )}
@@ -89,18 +74,20 @@ const Navbar = () => {
                         <input
                             type="text"
                             placeholder="Products, Brands, Category"
-                            className="border rounded px-3 py-2 w-full mb-2 text-gray-700"
+                            className="border rounded-full px-3 py-2 w-full mb-2 text-gray-700"
                         />
                         <div className="flex items-center space-x-2 mb-2">
                             <FaUserCircle size={24} />
-                            <span>Username</span>
+                            <span>
+                                {clientUsername ? clientUsername : "1"}
+                            </span>
                         </div>
                         <nav className="flex flex-col space-y-2">
-                            <Link href="/">Home</Link>
-                            <Link href="/shop">Shop</Link>
-                            <Link href="/contact">Contact</Link>
-                            <Link href="/wishlist">Wishlist</Link>
-                            <Link href="/orders">Orders</Link>
+                            <a href="/">Home</a>
+                            <a href="/shop">Shop</a>
+                            <a href="/contact">Contact</a>
+                            <a href="/wishlist">Wishlist</a>
+                            <a href="/orders">Orders</a>
                         </nav>
                     </div>
                 </div>
