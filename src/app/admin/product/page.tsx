@@ -6,7 +6,7 @@ import Head from 'next/head';
 
 export default function Home() {
     return (
-        <div className="min-h-screen bg-gray-100 p-4 mt-20">
+        <div className="min-h-screen bg-gray-100 p-4">
             <Head>
                 <title>E-commerce Dashboard</title>
                 <link rel="icon" href="/favicon.ico" />
