@@ -1,9 +1,8 @@
 "use client"
 
 import { IProductTableView } from '@/interface/product';
-import { useAppSelector } from '@/redux/hooks';
 import Link from 'next/link';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { FaEdit } from 'react-icons/fa';
 
 interface IProps {

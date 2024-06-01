@@ -16,13 +16,13 @@ export const productSlice = createSlice({
     name: "productSlice",
     initialState,
     reducers: {
-        setProduct: (state, action: PayloadAction<IProductResponse>) => {
+        setProductState: (state, action: PayloadAction<IProductResponse>) => {
             return action.payload
         }
     }
 });
 
 
-export const { setProduct } = productSlice.actions;
+export const { setProductState } = productSlice.actions;
 
 export const productReducer = productSlice.reducer;

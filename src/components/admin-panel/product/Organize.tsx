@@ -1,6 +1,43 @@
-import React from 'react';
+import { HttpRequest, ICategoryResponse } from '@/app/http.request.service';
+import { makeToast } from '@/common/helper';
+import { ICategory } from '@/components/category.add.edit.component';
+import MyModal from '@/components/category.modal';
+import React, { useEffect, useState } from 'react';
 
 const Organize = () => {
+
+    const [categories, setCategories] = useState<ICategoryResponse[]>([]);
+
+    const [open, setOpen] = useState(false);
+
+    const handleOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    const handleSubmit = async (data: ICategory) => {
+        const category = await HttpRequest.addCategory(data);
+
+        if (category)
+            makeToast("Category added successfully!")
+    };
+
+    async function fetchData() {
+        const category = await HttpRequest.getCategoryList();
+
+        if (category) {
+            setCategories(category);
+        }
+
+    }
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
     return (
         <div className="bg-white p-4 rounded-lg shadow-md mb-4">
             <h3 className="text-lg font-semibold mb-4">Organize</h3>
@@ -16,10 +53,13 @@ const Organize = () => {
                     <label className="block text-gray-700">Category</label>
                     <div className="flex items-center">
                         <select className="w-full p-2 border border-gray-300 rounded mr-2">
-                            <option>Select Category</option>
-                            {/* Add category options here */}
+                            {
+                                categories.map(category => <option key={category.Id}>{category.Name}</option>)
+                            }
+
                         </select>
-                        <button className="text-purple-600">Add new category</button>
+                        <button onClick={handleOpen} className="text-purple-600">Add new category</button>
+                        <MyModal open={open} onClose={handleClose} onSubmit={handleSubmit} />
                     </div>
                 </div>
                 <div>

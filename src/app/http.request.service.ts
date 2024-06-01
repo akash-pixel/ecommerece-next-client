@@ -1,7 +1,10 @@
 import { axiosInstance, setToken } from "@/axios";
+import { makeToast } from "@/common/helper";
+import { queryString } from "@/common/utils";
 import { WebRefService } from "@/common/web.ref.service";
 import { ICategory } from "@/components/category.add.edit.component";
-import { WebRef } from "@/constant";
+import { ErrorCode, TOAST_TYPE, WebRef } from "@/constant";
+import { ICategoryQuery } from "@/interface/category.interface";
 import { IProductResponse } from "@/interface/product";
 import { AxiosResponse } from "axios";
 
@@ -14,11 +17,17 @@ export class HttpRequest {
                 console.log("Data: ", error.response.data);
                 console.log("Status: ", error.response.status);
                 console.log("Error: ", error.response.headers);
+
+                if (ErrorCode.UNAUTHORIZED == error.response.status) {
+                    window.location.href = "/auth/login";
+                }
             }
             else if (error.request) {
+                makeToast("Request error", TOAST_TYPE.ERROR);
                 console.log("Request Error: ", error.request);
             }
             else {
+                makeToast(error.message, TOAST_TYPE.ERROR);
                 console.log('Error', error.message);
             }
             console.log("Config: ", error.config);
@@ -58,8 +67,8 @@ export class HttpRequest {
     }
 
     // Category
-    public static async getCategoryList(): Promise<ICategoryResponse[] | null> {
-        return this.executeFunction(axiosInstance.get("/category"));
+    public static async getCategoryList(query: ICategoryQuery = {}): Promise<ICategoryResponse[] | null> {
+        return this.executeFunction(axiosInstance.get(`/category?${queryString(query)}`));
     }
 
     public static async addCategory(data: ICategory): Promise<ICategoryResponse[] | null> {

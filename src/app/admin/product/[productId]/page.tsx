@@ -12,6 +12,10 @@ import Variants from '@/components/admin-panel/product/Variants';
 import Head from 'next/head';
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useAppDispatch } from "@/redux/hooks";
+import { setProductState } from "@/redux/slice/product.slice";
+import { useRouter } from 'next/navigation';
+
 
 interface IRouteParams {
     productId: string;
@@ -27,14 +31,24 @@ export default function EditProduct() {
         Description: "",
     });
 
-    const { productId } = useParams<any>()
+    const { productId } = useParams<any>();
+    const router = useRouter();
+
+
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
-        if (!product) return;
+        if (!Number(productId)) {
+            router.push("/");
+            return;
+        }
 
         HttpRequest.getProductById(productId).then(product => {
             console.log({ product })
-            setProduct(product);
+
+            if (!product) return;
+
+            dispatch(setProductState(product))
         })
     }, [])
 

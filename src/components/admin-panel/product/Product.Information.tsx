@@ -1,6 +1,16 @@
+"use client"
+import { IProductCreate } from '@/interface/product';
 import React from 'react';
 
-const ProductInformation = () => {
+
+interface IProps {
+    Product: IProductCreate
+}
+
+const ProductInformation = ({ Product }: IProps) => {
+
+
+
     return (
         <div className="bg-white p-4 rounded-lg shadow-md mb-4">
             <h3 className="text-lg font-semibold mb-4">Product information</h3>

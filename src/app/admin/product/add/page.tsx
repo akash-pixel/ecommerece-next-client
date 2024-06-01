@@ -28,6 +28,7 @@ export default function AddProduct() {
         Price: 0,
         Quantity: 0,
         Description: "",
+        // Files: []
     });
 
     return (
@@ -41,7 +42,7 @@ export default function AddProduct() {
                 <Header />
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
                     <div className="lg:col-span-2">
-                        <ProductInformation />
+                        <ProductInformation Product={product} />
                         <MediaUpload />
                         <Variants />
                         <Inventory />
