@@ -2,9 +2,16 @@ import { HttpRequest, ICategoryResponse } from '@/app/http.request.service';
 import { makeToast } from '@/common/helper';
 import { ICategory } from '@/components/category.add.edit.component';
 import MyModal from '@/components/category.modal';
+import { IProductCreate } from '@/interface/product';
 import React, { useEffect, useState } from 'react';
+import "./styles.css"
 
-const Organize = () => {
+interface IProps {
+    Product?: IProductCreate
+}
+
+
+const Organize = ({ }: IProps) => {
 
     const [categories, setCategories] = useState<ICategoryResponse[]>([]);
 
@@ -34,17 +41,23 @@ const Organize = () => {
 
     }
 
+    const Badge = ({ text }: { text: string }) => {
+        return (
+            <span className="badge">{text}</span>
+        );
+    };
+
     useEffect(() => {
         fetchData();
     }, []);
 
     return (
-        <div className="bg-white p-4 rounded-lg shadow-md mb-4">
-            <h3 className="text-lg font-semibold mb-4">Organize</h3>
+        <div className="product-info-container">
+            <h3 className="sub-heading">Organize</h3>
             <div className="space-y-4">
                 <div>
                     <label className="block text-gray-700">Vendor</label>
-                    <select className="w-full p-2 border border-gray-300 rounded">
+                    <select className="w-full p-2 border border-gray-300 rounded text-gray-500 bg-white">
                         <option>Select Vendor</option>
                         {/* Add vendor options here */}
                     </select>
@@ -52,7 +65,7 @@ const Organize = () => {
                 <div>
                     <label className="block text-gray-700">Category</label>
                     <div className="flex items-center">
-                        <select className="w-full p-2 border border-gray-300 rounded mr-2">
+                        <select className="w-full p-2 border border-gray-300 rounded mr-2 text-gray-500 bg-white">
                             {
                                 categories.map(category => <option key={category.Id}>{category.Name}</option>)
                             }
@@ -64,11 +77,11 @@ const Organize = () => {
                 </div>
                 <div>
                     <label className="block text-gray-700">Collection</label>
-                    <input type="text" placeholder="Collection" className="w-full p-2 border border-gray-300 rounded" />
+                    <input type="text" placeholder="Collection" className="w-full p-2 border border-gray-300 rounded text-gray-500 bg-white" />
                 </div>
                 <div>
                     <label className="block text-gray-700">Status</label>
-                    <select className="w-full p-2 border border-gray-300 rounded">
+                    <select className="w-full p-2 border border-gray-300 rounded text-gray-500 bg-white">
                         <option>Published</option>
                         {/* Add other status options here */}
                     </select>
@@ -76,10 +89,9 @@ const Organize = () => {
                 <div>
                     <label className="block text-gray-700">Tags</label>
                     <div className="flex flex-wrap gap-2">
-                        {/* Example tags */}
-                        <span className="px-2 py-1 bg-gray-200 rounded">Normal</span>
-                        <span className="px-2 py-1 bg-gray-200 rounded">Standard</span>
-                        <span className="px-2 py-1 bg-gray-200 rounded">Premium</span>
+                        <Badge text="Normal" />
+                        <Badge text="Standard" />
+                        <Badge text="Premium" />
                     </div>
                 </div>
             </div>

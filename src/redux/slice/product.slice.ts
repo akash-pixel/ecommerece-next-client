@@ -18,7 +18,10 @@ export const productSlice = createSlice({
     reducers: {
         setProductState: (state, action: PayloadAction<IProductResponse>) => {
             return action.payload
-        }
+        },
+        // updateProductInformation: (state, action: PayloadAction<IProductResponse>) => {
+        //     return state.ProductInformation = action.payload;
+        // }
     }
 });
 

@@ -1,15 +1,15 @@
 "use client"
 
+import Header from "@/components/admin-panel/product/product-form/Header";
 import "../../../globals.css"
-import Header from '@/components/admin-panel/product/Header';
-import Inventory from '@/components/admin-panel/product/Inventory';
-import MediaUpload from '@/components/admin-panel/product/MediaUpload';
-import Organize from '@/components/admin-panel/product/Organize';
-import Pricing from '@/components/admin-panel/product/Pricing';
-import ProductInformation from '@/components/admin-panel/product/Product.Information';
-import Variants from '@/components/admin-panel/product/Variants';
 import Head from 'next/head';
 import { useState } from "react";
+import ProductInformation from "@/components/admin-panel/product/product-form/Product.Information";
+import MediaUpload from "@/components/admin-panel/product/product-form/MediaUpload";
+import Variants from "@/components/admin-panel/product/product-form/Variants";
+import Pricing from "@/components/admin-panel/product/product-form/Pricing";
+import Organize from "@/components/admin-panel/product/product-form/Organize";
+import Inventory from "@/components/admin-panel/product/product-form/Inventory";
 
 export interface IProductCreate {
     Name: string,
@@ -28,7 +28,6 @@ export default function AddProduct() {
         Price: 0,
         Quantity: 0,
         Description: "",
-        // Files: []
     });
 
     return (
@@ -43,13 +42,13 @@ export default function AddProduct() {
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
                     <div className="lg:col-span-2">
                         <ProductInformation Product={product} />
-                        <MediaUpload />
-                        <Variants />
-                        <Inventory />
+                        <MediaUpload Product={product} />
+                        <Variants Product={product} />
+                        <Inventory Product={product} />
                     </div>
                     <div className="lg:col-span-1 space-y-4">
-                        <Pricing />
-                        <Organize />
+                        <Pricing Product={product} />
+                        <Organize Product={product} />
                     </div>
                 </div>
             </div>

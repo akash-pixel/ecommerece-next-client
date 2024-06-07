@@ -1,14 +1,20 @@
+import { IProductCreate } from '@/interface/product';
 import React from 'react';
+import "./styles.css"
 
-const Variants = () => {
+interface IProps {
+    Product?: IProductCreate
+}
+
+const Variants = ({ }: IProps) => {
     return (
-        <div className="bg-white p-4 rounded-lg shadow-md mb-4">
-            <h3 className="text-lg font-semibold mb-4">Variants</h3>
+        <div className="product-info-container">
+            <h3 className="sub-heading">Variants</h3>
             <div className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                     <div>
                         <label className="block text-gray-700">Options</label>
-                        <select className="w-full p-2 border border-gray-300 rounded">
+                        <select className="w-full p-2 border border-gray-300 rounded bg-white text-gray-500" >
                             <option>Size</option>
                             {/* Add other options here */}
                         </select>
@@ -18,7 +24,7 @@ const Variants = () => {
                         <input type="text" placeholder="Enter size" className="w-full p-2 border border-gray-300 rounded" />
                     </div>
                 </div>
-                <button className="px-4 py-2 text-white bg-blue-600 rounded-lg">Add another option</button>
+                <button className="btn">Add another option</button>
             </div>
         </div>
     );
