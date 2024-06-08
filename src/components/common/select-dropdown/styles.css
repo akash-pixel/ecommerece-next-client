@@ -1,0 +1,21 @@
+/* Select Dropdown Styles */
+
+.select-dropdown {
+    margin-bottom: 16px;
+}
+
+.select-label {
+    display: block;
+    color: var(--bs-gray-dark);
+    margin-bottom: 4px;
+}
+
+.select-input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    background-color: var(--bs-light);
+    color: #6b7280;
+    box-sizing: border-box;
+}

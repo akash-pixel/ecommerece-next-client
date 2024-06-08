@@ -1,6 +1,6 @@
 "use client"
 
-import { addCategory, getCategoryById, updateCategory } from "@/axios";
+import { HttpRequest } from "@/app/http.request.service";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 
 export interface ICategory {
@@ -24,10 +24,10 @@ export default function AddEditCategory(props: ICategoryEditProps) {
         event.preventDefault();
 
         if (category.Id) {
-            await updateCategory(category);
+            await HttpRequest.updateCategory(category);
 
         } else {
-            const newCategory = await addCategory(category);
+            const newCategory = await HttpRequest.addCategory(category);
             if (!newCategory) return;
         }
     }
@@ -38,7 +38,7 @@ export default function AddEditCategory(props: ICategoryEditProps) {
 
     useEffect(() => {
         if (props.id) {
-            getCategoryById(props.id).then((categ) => {
+            HttpRequest.getCategoryById(props.id).then((categ) => {
                 console.log(categ)
                 if (categ) {
                     setCategory(categ as any)

@@ -1,0 +1,68 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.add-product {
+    min-height: 100vh;
+    background-color: #f7fafc;
+    padding: 16px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.content-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+
+@media (min-width: 1024px) {
+    .content-grid {
+        grid-template-columns: 2fr 1fr;
+    }
+}
+
+.main-section {
+    grid-column: span 1;
+}
+
+.side-section {
+    grid-column: span 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Example styles for header and components */
+#header {
+    height: 60px;
+    background-color: #333;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-information,
+.media-upload,
+.variants,
+.inventory,
+.pricing,
+.organize {
+    background-color: #fff;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 16px;
+}
+
+.pricing,
+.organize {
+    margin-bottom: 0;
+}

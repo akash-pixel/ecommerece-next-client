@@ -10,6 +10,7 @@ import Variants from "@/components/admin-panel/product/product-form/Variants";
 import Pricing from "@/components/admin-panel/product/product-form/Pricing";
 import Organize from "@/components/admin-panel/product/product-form/Organize";
 import Inventory from "@/components/admin-panel/product/product-form/Inventory";
+import "./styles.css"
 
 export interface IProductCreate {
     Name: string,
@@ -31,22 +32,22 @@ export default function AddProduct() {
     });
 
     return (
-        <div className="min-h-screen bg-gray-100 p-4">
+        <div className="add-product">
             <Head>
                 <title>Add New Product</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <div className="container mx-auto">
+            <div className="container">
                 <Header />
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-                    <div className="lg:col-span-2">
+                <div className="content-grid">
+                    <div className="main-section">
                         <ProductInformation Product={product} />
                         <MediaUpload Product={product} />
-                        <Variants Product={product} />
+                        <Variants product={product} />
                         <Inventory Product={product} />
                     </div>
-                    <div className="lg:col-span-1 space-y-4">
+                    <div className="side-section">
                         <Pricing Product={product} />
                         <Organize Product={product} />
                     </div>

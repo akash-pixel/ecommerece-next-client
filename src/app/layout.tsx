@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import Navbar from "../components/navbar";
+import Navbar from "../components/navbar/navbar";
 import ReduxProvider from "./StoreProvider";
 import { Toaster } from "react-hot-toast";
 

@@ -1,33 +1,72 @@
+"use client"
+
+
+import React, { useState } from 'react';
+import './styles.css';
 import { IProductCreate } from '@/interface/product';
-import React from 'react';
-import "./styles.css"
 
 interface IProps {
-    Product?: IProductCreate
+    product?: IProductCreate
 }
 
+
 const Variants = ({ }: IProps) => {
+    const [option, setOption] = useState('');
+    const [size, setSize] = useState('');
+
+    const handleOptionChange = (e: any) => {
+        setOption(e.target.value);
+    };
+
+    const handleSizeChange = (e: any) => {
+        setSize(e.target.value);
+    };
+
     return (
-        <div className="product-info-container">
-            <h3 className="sub-heading">Variants</h3>
-            <div className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
-                    <div>
-                        <label className="block text-gray-700">Options</label>
-                        <select className="w-full p-2 border border-gray-300 rounded bg-white text-gray-500" >
-                            <option>Size</option>
-                            {/* Add other options here */}
-                        </select>
-                    </div>
-                    <div>
-                        <label className="block text-gray-700">Enter size</label>
-                        <input type="text" placeholder="Enter size" className="w-full p-2 border border-gray-300 rounded" />
-                    </div>
-                </div>
-                <button className="btn">Add another option</button>
+        <div className="variants-container">
+            <h3 className="variants-heading">Variants</h3>
+            <label className="options-label">OPTIONS</label>
+            <div className="variants-form">
+                <SelectBox
+                    options={['Size', 'Color', 'Material']}
+                    value={option}
+                    onChange={handleOptionChange}
+                />
+                <InputBox
+                    placeholder="Enter size"
+                    value={size}
+                    onChange={handleSizeChange}
+                />
+                <button className="add-option-button">Add another option</button>
             </div>
         </div>
     );
 };
 
+const InputBox = ({ placeholder, value, onChange }: any) => {
+    return (
+        <input
+            type="text"
+            className="input-box"
+            placeholder={placeholder}
+            value={value}
+            onChange={onChange}
+        />
+    );
+};
+
+
+const SelectBox = ({ options, value, onChange }: any) => {
+    return (
+        <select className="select-box" value={value} onChange={onChange}>
+            {options.map((option: any, index: any) => (
+                <option key={index} value={option}>
+                    {option}
+                </option>
+            ))}
+        </select>
+    );
+};
+
 export default Variants;
+

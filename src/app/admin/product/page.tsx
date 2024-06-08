@@ -1,12 +1,15 @@
 "use client"
 
+import Filter from "@/components/admin-panel/product/product-list/Filter";
 import "../../globals.css"
-import Filter from '@/components/admin-panel/product/product-list/Filter';
-import Pagination from '@/components/admin-panel/product/product-list/Pagination';
-import ProductTable from '@/components/admin-panel/product/product-list/Product.Table';
+// import Filter from '@/components/admin-panel/product/Filter';
+// import Pagination from '@/components/admin-panel/product/Pagination';
+// import ProductTable from '@/components/admin-panel/product/Product.Table';
 import Head from 'next/head';
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import ProductTable from "@/components/admin-panel/product/product-list/Product.Table";
+import Pagination from "@/components/admin-panel/product/product-list/Pagination";
 
 export default function Product() {
 

@@ -96,20 +96,3 @@ body {
     text-wrap: balance;
   }
 }
-
-.navbar {
-  border: 5px solid red;
-  border-bottom: 1px solid black;
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  padding: 1.5%;
-  font-size: large;
-  background-color: white;
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 60px;
-  z-index: 1000;
-  color: black;
-}

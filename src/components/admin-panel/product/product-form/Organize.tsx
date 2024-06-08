@@ -1,7 +1,7 @@
 import { HttpRequest, ICategoryResponse } from '@/app/http.request.service';
 import { makeToast } from '@/common/helper';
 import { ICategory } from '@/components/category.add.edit.component';
-import MyModal from '@/components/category.modal';
+import MyModal from '@/components/admin-panel/category-modal/category.modal';
 import { IProductCreate } from '@/interface/product';
 import React, { useEffect, useState } from 'react';
 import "./styles.css"
@@ -55,11 +55,10 @@ const Organize = ({ }: IProps) => {
         <div className="product-info-container">
             <h3 className="sub-heading">Organize</h3>
             <div className="space-y-4">
-                <div>
+                {/* <div>
                     <label className="block text-gray-700">Vendor</label>
                     <select className="w-full p-2 border border-gray-300 rounded text-gray-500 bg-white">
                         <option>Select Vendor</option>
-                        {/* Add vendor options here */}
                     </select>
                 </div>
                 <div>
@@ -83,9 +82,40 @@ const Organize = ({ }: IProps) => {
                     <label className="block text-gray-700">Status</label>
                     <select className="w-full p-2 border border-gray-300 rounded text-gray-500 bg-white">
                         <option>Published</option>
+                    </select>
+                </div> */}
+                <div className="organize-form-group">
+                    <label className="product-info-label">Vendor</label>
+                    <select className="organize-form-select">
+                        <option>Select Vendor</option>
+                        {/* Add vendor options here */}
+                    </select>
+                </div>
+                <div className="organize-form-group">
+                    <label className="product-info-label">Category</label>
+                    <div className="organize-form-category">
+                        <select className="organize-form-select organize-form-select-category">
+                            {
+                                categories.map(category => <option key={category.Id}>{category.Name}</option>)
+                            }
+                        </select>
+                        <button onClick={handleOpen} className="organize-form-button">Add new category</button>
+                        <MyModal open={open} onClose={handleClose} onSubmit={handleSubmit} />
+                    </div>
+                </div>
+                <div className="organize-form-group">
+                    <label className="product-info-label">Collection</label>
+                    <input type="text" placeholder="Collection" className="organize-form-input" />
+                </div>
+                <div className="organize-form-group">
+                    <label className="product-info-label">Status</label>
+                    <select className="organize-form-select">
+                        <option>Published</option>
                         {/* Add other status options here */}
                     </select>
                 </div>
+
+
                 <div>
                     <label className="block text-gray-700">Tags</label>
                     <div className="flex flex-wrap gap-2">

@@ -22,10 +22,8 @@
 
 import CategoryTable from "@/components/admin-panel/category/CategoryTable";
 import "../../globals.css"
-import Filter from '@/components/admin-panel/product/product-list/Filter';
-import Pagination from '@/components/admin-panel/product/product-list/Pagination';
-import ProductTable from '@/components/admin-panel/product/product-list/Product.Table';
 import Head from 'next/head';
+import Pagination from "@/components/admin-panel/product/product-list/Pagination";
 
 export default function Home() {
     return (
@@ -48,7 +46,7 @@ export default function Home() {
                     <button className="px-4 py-2 bg-blue-500 text-white rounded-lg">+ Add Category</button>
                 </div>
                 <CategoryTable />
-                <Pagination />
+                <Pagination SetPageNumber={() => { }} PageNumber={0} />
             </div>
         </div>
     );
