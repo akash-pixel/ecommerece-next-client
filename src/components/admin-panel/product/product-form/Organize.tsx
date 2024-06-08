@@ -5,6 +5,8 @@ import MyModal from '@/components/admin-panel/category-modal/category.modal';
 import { IProductCreate } from '@/interface/product';
 import React, { useEffect, useState } from 'react';
 import "./styles.css"
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { updateProductOrganize } from '@/redux/slice/product.slice';
 
 interface IProps {
     Product?: IProductCreate
@@ -13,8 +15,10 @@ interface IProps {
 
 const Organize = ({ }: IProps) => {
 
-    const [categories, setCategories] = useState<ICategoryResponse[]>([]);
+    const productOrgnize = useAppSelector((state) => state.product.Organize);
+    const dispatch = useAppDispatch();
 
+    const [categories, setCategories] = useState<ICategoryResponse[]>([]);
     const [open, setOpen] = useState(false);
 
     const handleOpen = () => {
@@ -47,6 +51,14 @@ const Organize = ({ }: IProps) => {
         );
     };
 
+    const handleDropdownSelect = (e: any) => {
+        dispatch(updateProductOrganize({ ...productOrgnize, [e.target.name]: e.target.value }));
+    }
+
+    const handleTextChange = (e: any) => {
+        dispatch(updateProductOrganize({ ...productOrgnize, [e.target.name]: e.target.value }));
+    }
+
     useEffect(() => {
         fetchData();
     }, []);
@@ -55,48 +67,18 @@ const Organize = ({ }: IProps) => {
         <div className="product-info-container">
             <h3 className="sub-heading">Organize</h3>
             <div className="space-y-4">
-                {/* <div>
-                    <label className="block text-gray-700">Vendor</label>
-                    <select className="w-full p-2 border border-gray-300 rounded text-gray-500 bg-white">
-                        <option>Select Vendor</option>
-                    </select>
-                </div>
-                <div>
-                    <label className="block text-gray-700">Category</label>
-                    <div className="flex items-center">
-                        <select className="w-full p-2 border border-gray-300 rounded mr-2 text-gray-500 bg-white">
-                            {
-                                categories.map(category => <option key={category.Id}>{category.Name}</option>)
-                            }
-
-                        </select>
-                        <button onClick={handleOpen} className="text-purple-600">Add new category</button>
-                        <MyModal open={open} onClose={handleClose} onSubmit={handleSubmit} />
-                    </div>
-                </div>
-                <div>
-                    <label className="block text-gray-700">Collection</label>
-                    <input type="text" placeholder="Collection" className="w-full p-2 border border-gray-300 rounded text-gray-500 bg-white" />
-                </div>
-                <div>
-                    <label className="block text-gray-700">Status</label>
-                    <select className="w-full p-2 border border-gray-300 rounded text-gray-500 bg-white">
-                        <option>Published</option>
-                    </select>
-                </div> */}
                 <div className="organize-form-group">
                     <label className="product-info-label">Vendor</label>
-                    <select className="organize-form-select">
+                    <select className="organize-form-select" name="VendorId" onChange={handleDropdownSelect} >
                         <option>Select Vendor</option>
-                        {/* Add vendor options here */}
                     </select>
                 </div>
                 <div className="organize-form-group">
                     <label className="product-info-label">Category</label>
                     <div className="organize-form-category">
-                        <select className="organize-form-select organize-form-select-category">
+                        <select className="organize-form-select organize-form-select-category" name='CategoryId' onChange={handleDropdownSelect} value={productOrgnize.CategoryId} >
                             {
-                                categories.map(category => <option key={category.Id}>{category.Name}</option>)
+                                categories.map(category => <option key={category.Id} value={category.Id}>{category.Name}</option>)
                             }
                         </select>
                         <button onClick={handleOpen} className="organize-form-button">Add new category</button>
@@ -105,13 +87,14 @@ const Organize = ({ }: IProps) => {
                 </div>
                 <div className="organize-form-group">
                     <label className="product-info-label">Collection</label>
-                    <input type="text" placeholder="Collection" className="organize-form-input" />
+                    <input type="text" value={productOrgnize.Collection} onChange={handleTextChange} placeholder="Collection" className="organize-form-input" />
                 </div>
                 <div className="organize-form-group">
                     <label className="product-info-label">Status</label>
-                    <select className="organize-form-select">
+                    <select className="organize-form-select" name='StatusId' value={productOrgnize.StatusId} onChange={handleDropdownSelect} >
                         <option>Published</option>
-                        {/* Add other status options here */}
+                        <option>Scheduled</option>
+                        <option>Inactive</option>
                     </select>
                 </div>
 

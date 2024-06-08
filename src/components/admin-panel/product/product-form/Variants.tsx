@@ -21,6 +21,7 @@ const Variants = ({ }: IProps) => {
     const handleSizeChange = (e: any) => {
         setSize(e.target.value);
     };
+    console.log("Variant")
 
     return (
         <div className="variants-container">

@@ -3,6 +3,8 @@
 import { IProductCreate } from '@/interface/product';
 import React from 'react';
 import './styles.css';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { updateProductInventory } from '@/redux/slice/product.slice';
 
 interface IProps {
     Product?: IProductCreate
@@ -10,6 +12,13 @@ interface IProps {
 
 
 const Inventory = ({ }: IProps) => {
+    const productInventory = useAppSelector((state) => state.product.Inventory);
+    const dispatch = useAppDispatch();
+
+    const handleTextChange = (e: any) => {
+        dispatch(updateProductInventory({ ...productInventory, [e.target.name]: e.target.value }))
+    }
+
     return (
         <div className="inventory-container">
             <h3 className="sub-heading">Inventory</h3>
@@ -26,7 +35,9 @@ const Inventory = ({ }: IProps) => {
                     <div className="inventory-options">
                         <div>
                             <label className="inventory-label">Add to Stock</label>
-                            <input type="number" placeholder="Quantity" className="inventory-input" />
+                            <input type="number" placeholder="Quantity" className="inventory-input"
+                                name="Quantity" value={productInventory.Quantity}
+                                onChange={handleTextChange} />
                             <button className="inventory-confirm-button">Confirm</button>
                         </div>
                         <div className="inventory-info">

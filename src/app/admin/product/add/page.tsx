@@ -3,7 +3,7 @@
 import Header from "@/components/admin-panel/product/product-form/Header";
 import "../../../globals.css"
 import Head from 'next/head';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProductInformation from "@/components/admin-panel/product/product-form/Product.Information";
 import MediaUpload from "@/components/admin-panel/product/product-form/MediaUpload";
 import Variants from "@/components/admin-panel/product/product-form/Variants";
@@ -31,6 +31,10 @@ export default function AddProduct() {
         Description: "",
     });
 
+    useEffect(() => {
+
+    }, [])
+
     return (
         <div className="add-product">
             <Head>
@@ -42,14 +46,14 @@ export default function AddProduct() {
                 <Header />
                 <div className="content-grid">
                     <div className="main-section">
-                        <ProductInformation Product={product} />
-                        <MediaUpload Product={product} />
-                        <Variants product={product} />
-                        <Inventory Product={product} />
+                        <ProductInformation />
+                        <MediaUpload />
+                        <Variants />
+                        <Inventory />
                     </div>
                     <div className="side-section">
-                        <Pricing Product={product} />
-                        <Organize Product={product} />
+                        <Pricing />
+                        <Organize />
                     </div>
                 </div>
             </div>

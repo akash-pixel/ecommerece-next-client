@@ -2,19 +2,19 @@
 
 import { HttpRequest } from "@/app/http.request.service";
 import "../../../globals.css"
-import Header from '@/components/admin-panel/product/Header';
-import Inventory from '@/components/admin-panel/product/Inventory';
-import MediaUpload from '@/components/admin-panel/product/MediaUpload';
-import Organize from '@/components/admin-panel/product/Organize';
-import Pricing from '@/components/admin-panel/product/Pricing';
-import ProductInformation from '@/components/admin-panel/product/Product.Information';
-import Variants from '@/components/admin-panel/product/Variants';
 import Head from 'next/head';
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useAppDispatch } from "@/redux/hooks";
 import { setProductState } from "@/redux/slice/product.slice";
 import { useRouter } from 'next/navigation';
+import Header from "@/components/admin-panel/product/product-form/Header";
+import ProductInformation from "@/components/admin-panel/product/product-form/Product.Information";
+import Variants from "@/components/admin-panel/product/product-form/Variants";
+import MediaUpload from "@/components/admin-panel/product/product-form/MediaUpload";
+import Pricing from "@/components/admin-panel/product/product-form/Pricing";
+import Organize from "@/components/admin-panel/product/product-form/Organize";
+import Inventory from "@/components/admin-panel/product/product-form/Inventory";
 
 
 interface IRouteParams {
@@ -23,37 +23,28 @@ interface IRouteParams {
 
 export default function EditProduct() {
 
-    const [product, setProduct] = useState<any>({
-        Name: "",
-        SKU: "",
-        Price: 0,
-        Quantity: 0,
-        Description: "",
-    });
-
     const { productId } = useParams<any>();
     const router = useRouter();
 
 
     const dispatch = useAppDispatch();
 
+    async function fetchProduct() {
+        if (!productId) return router.push("/admin/product");
+
+        let product = await HttpRequest.getProductById(productId);
+        if (!product) return router.push("/admin/product");
+
+        dispatch(setProductState(product));
+    }
+
     useEffect(() => {
-        if (!Number(productId)) {
-            router.push("/");
-            return;
-        }
+        fetchProduct();
 
-        HttpRequest.getProductById(productId).then(product => {
-            console.log({ product })
-
-            if (!product) return;
-
-            dispatch(setProductState(product))
-        })
     }, [])
 
     return (
-        <div className="min-h-screen bg-gray-100 p-4 mt-20">
+        <div className="min-h-screen bg-gray-100 p-4 ">
             <Head>
                 <title>Edit Product</title>
                 <link rel="icon" href="/favicon.ico" />

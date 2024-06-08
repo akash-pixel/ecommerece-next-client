@@ -56,7 +56,7 @@ const Login = () => {
                         <input
                             type="text"
                             id="username"
-                            className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
+                            className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-200 text-gray-900"
                             placeholder="Username"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
@@ -69,7 +69,7 @@ const Login = () => {
                             <input
                                 type={showPassword ? "text" : "password"}
                                 id="password"
-                                className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
+                                className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-200 text-gray-900"
                                 placeholder="Password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}

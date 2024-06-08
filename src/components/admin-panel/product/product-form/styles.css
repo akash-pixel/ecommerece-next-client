@@ -17,6 +17,7 @@
     padding: 0.5rem;
     border: 1px solid #d2d6dc;
     border-radius: 0.25rem;
+    color: var(--bs-dark)
 }
 
 .product-info-grid {
@@ -224,6 +225,7 @@
 }
 
 .product-info-input {
+    color: var(--bs-dark);
     width: 100%;
     padding: 0.5rem;
     border: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color);

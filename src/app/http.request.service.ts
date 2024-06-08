@@ -58,8 +58,12 @@ export class HttpRequest {
         return this.executeFunction(axiosInstance.get("/product"));
     }
 
-    public static async addProduct(data: any): Promise<IProductResponse[] | null> {
+    public static async saveProduct(data: any): Promise<IProductResponse[] | null> {
         return this.executeFunction(axiosInstance.post("/product", data));
+    }
+
+    public static async updateProduct(productId: number, data: any): Promise<IProductResponse[] | null> {
+        return this.executeFunction(axiosInstance.put(`/product/${productId}`, data));
     }
 
     public static async getProductById(id: number): Promise<IProductResponse | null> {

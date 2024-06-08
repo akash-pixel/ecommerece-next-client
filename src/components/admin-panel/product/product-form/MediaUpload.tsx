@@ -2,10 +2,10 @@ import { IProductCreate } from '@/interface/product';
 import React from 'react';
 
 interface IProps {
-    Product: IProductCreate
+    Product?: IProductCreate
 }
 
-const MediaUpload = ({ }: IProductCreate) => {
+const MediaUpload = ({ }: IProps) => {
     return (
         <div className="media-uploader">
             <div className="media-header">
