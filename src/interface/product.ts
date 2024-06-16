@@ -83,4 +83,5 @@ export interface IProductSavePayload {
     ProductInventoryId?: number;
     CategoryId?: number;
     StatusId: number;
+    FileIds: number[];
 }

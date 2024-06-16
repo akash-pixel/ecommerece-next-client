@@ -1,0 +1,132 @@
+/* styles for Banner */
+.banner {
+    background-image: url("https://media.istockphoto.com/id/610563326/photo/interior-with-armchair-and-coffee-table-3d-rendering.jpg?s=2048x2048&w=is&k=20&c=GCj_13kUBx-ySLTAji0w9SZ10YerI8nUSGqYIsxrLug=");
+    /* background: linear-gradient(#e66465, #9198e5); */
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    position: relative;
+}
+
+.banner-content {
+    background-color: rgba(255, 239, 213, 0.9);
+    /* Slightly transparent background */
+    padding: 2rem;
+    border-radius: 0.5rem;
+    max-width: 400px;
+    text-align: left;
+}
+
+.banner-subtitle {
+    font-size: 1rem;
+    font-weight: normal;
+    margin-bottom: 0.5rem;
+    color: #a69b8f;
+}
+
+.banner-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #d4a35e;
+}
+
+.banner-text {
+    font-size: 1rem;
+    color: #666666;
+    margin-bottom: 1.5rem;
+}
+
+.banner-button {
+    background-color: #d4a35e;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.banner-button:hover {
+    background-color: #b5884e;
+}
+
+
+/* styles for BrowseRange */
+.browse-range {
+    padding: 2rem;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.section-subtitle {
+    font-size: 1rem;
+    color: #777;
+    margin-bottom: 2rem;
+}
+
+.categories {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.category-card {
+    flex: 1;
+    max-width: 300px;
+    text-align: center;
+}
+
+.category-image {
+    width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    transition: transform 0.3s;
+}
+
+.category-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-top: 0.5rem;
+    color: #333;
+}
+
+.category-card:hover .category-image {
+    transform: scale(1.05);
+}
+
+.browse-product {
+    padding: 10rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .categories {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .category-card {
+        max-width: 100%;
+    }
+}
+
+@media (min-width: 1280px) {
+    .banner-content {
+        margin-left: 800px;
+    }
+}

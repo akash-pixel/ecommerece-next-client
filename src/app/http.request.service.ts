@@ -70,6 +70,15 @@ export class HttpRequest {
         return this.executeFunction(axiosInstance.get(`/product/${id}`));
     }
 
+    // Product Images
+
+    // /product/images
+    public static async uploadProductImage(data: any): Promise<any | null> {
+        return this.executeFunction(axiosInstance.post(`/product/images`, data, {
+            headers: { "Content-Type": "multipart/form-data" }
+        }));
+    }
+
     // Category
     public static async getCategoryList(query: ICategoryQuery = {}): Promise<ICategoryResponse[] | null> {
         return this.executeFunction(axiosInstance.get(`/category?${queryString(query)}`));

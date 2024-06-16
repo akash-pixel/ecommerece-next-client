@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import ProductTable from "@/components/admin-panel/product/product-list/Product.Table";
 import Pagination from "@/components/admin-panel/product/product-list/Pagination";
 import { HttpRequest } from "@/app/http.request.service";
+import "./styles.css"
 
 export default function Product() {
 
@@ -36,16 +37,17 @@ export default function Product() {
     }, [])
 
     return (
-        <div className="min-h-screen bg-gray-100 p-4">
+
+        <div className="min-h-screen">
             <Head>
                 <title>E-commerce Dashboard</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <div className="container mx-auto">
+            <div className="container">
                 <Filter />
                 <div className="mb-4 flex justify-between items-center">
                     <div className="text-lg font-semibold">Products</div>
-                    <Link href="/admin/product/add" className="px-4 py-2 bg-blue-500 text-white rounded-lg" >+ Add Product</Link>
+                    <Link href="/admin/product/add" className="link-button">+ Add Product</Link>
                 </div>
                 <ProductTable Products={productList} />
                 <Pagination SetPageNumber={setPageNumber} PageNumber={pageNumber} />

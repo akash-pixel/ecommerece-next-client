@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import Navbar from "../components/navbar/navbar";
+import Navbar from "../components/navbar/navbar.component";
 import ReduxProvider from "./StoreProvider";
 import { Toaster } from "react-hot-toast";
 
@@ -27,7 +27,7 @@ export default function RootLayout({
       <body >
         <ReduxProvider>
           <Navbar />
-          <div className="pt-16">
+          <div className="">
             {children}
           </div>
         </ReduxProvider>

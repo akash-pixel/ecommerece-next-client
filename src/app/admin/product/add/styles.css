@@ -62,6 +62,10 @@ html {
     margin-bottom: 16px;
 }
 
+.media-upload {
+    border: 2px dashed var(--bs-gray-dark);
+}
+
 .pricing,
 .organize {
     margin-bottom: 0;
