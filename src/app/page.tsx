@@ -2,6 +2,8 @@
 import ProductContainer from "@/components/product-container/product-container.component";
 import "./globals.css"
 import "./style.css"
+import Footer from "@/components/footer/footer";
+import ImageSwiper from "@/components/image-swiper/image-swiper";
 
 function App() {
 
@@ -54,7 +56,9 @@ function App() {
                 <h2 className="section-title">Our Products</h2>
                 <ProductContainer products={products} />
             </div>
+            <ImageSwiper />
 
+            <Footer />
         </div>
     );
 }
